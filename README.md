@@ -1,99 +1,228 @@
 # IT Support Simulation Lab
 
-A self-contained enterprise IT environment built to practice the full lifecycle of IT support and systems administration — from infrastructure design and Active Directory deployment to helpdesk operations using osTicket.
+A self-contained enterprise IT environment built to practice the full lifecycle of IT support and systems administration — from infrastructure design and Active Directory deployment to helpdesk operations using a Docker-deployed ticketing system.
 
-## Project Overview
+The project simulates a small enterprise environment where users, permissions, policies, troubleshooting scenarios, and support workflows are managed as they would be in a real IT environment.
 
-This lab simulates a small enterprise environment consisting of:
+---
 
-- Windows Server 2022 Domain Controller
-- Windows 10 domain-joined workstation
-- Docker-based osTicket helpdesk system
+# Lab Architecture
 
-The goal was to practice Active Directory administration, Group Policy management, permissions, troubleshooting, and real-world IT support workflows.
+The environment consists of two virtual machines running on an isolated Oracle VirtualBox NAT network:
 
-## Lab Architecture
+## DC01 — Windows Server 2022
 
-### DC01 - Windows Server 2022
+Configured as the enterprise Domain Controller:
 
-Configured with:
-
-- Active Directory Domain Services
-- DNS
+- Active Directory Domain Services (AD DS)
+- DNS Server
 - Domain: `corp.local`
 - Organizational Units
 - Security Groups
 - Group Policy Objects
-- NTFS permissions
+- NTFS Permissions
 
-### CLIENT01 - Windows 10
+Resources:
 
-Configured with:
+- 4096 MB RAM
+- 2 Processors
+- 60 GB Storage
 
-- Domain membership
+---
+
+## CLIENT01 — Windows 10
+
+Domain-joined workstation used for:
+
 - User testing
-- GPO verification
+- Group Policy verification
 - Network drive validation
+- Access control testing
 
-### Helpdesk System
+Resources:
 
-Deployed using Docker Compose:
+- 4096 MB RAM
+- 2 Processors
+- 40 GB Storage
+
+---
+
+# Active Directory Implementation
+
+## Organizational Units
+
+Created the following structure:
+
+- HR
+- Sales
+- IT-Support
+- Disabled-Accounts
+
+## Security Groups
+
+Implemented role-based access control using:
+
+- HR-Team
+- Sales-Team
+- IT-Admins
+- Sales-HR-Project-Team
+
+---
+
+# Group Policy Configuration
+
+Implemented enterprise-style policies:
+
+## Sales Drive Mapping
+
+Created a Group Policy Object:
+
+**Sales - Map Drive**
+
+Features:
+
+- Automatic S: network drive mapping
+- Applied to Sales OU
+- Restricted using item-level targeting
+- Security group based filtering
+
+---
+
+## Account Lockout Policy
+
+Configured:
+
+- 5 failed login attempts
+- 30-minute account lockout duration
+- 30-minute counter reset period
+
+---
+
+# IT Support Scenarios
+
+Four realistic support scenarios were completed from issue identification to resolution.
+
+## 1. Account Lockout
+
+Scenario:
+
+A user was unable to access their account after multiple failed login attempts.
+
+Resolution:
+
+- Identified locked account in Active Directory Users and Computers
+- Unlocked the user account
+- Verified successful login
+
+---
+
+## 2. New-Hire Onboarding
+
+Scenario:
+
+A new employee required access to company resources.
+
+Resolution:
+
+- Created new Active Directory account
+- Assigned department group membership
+- Forced password change at first login
+
+---
+
+## 3. Cross-Department Permissions
+
+Scenario:
+
+An HR employee required access to a shared Sales project folder.
+
+Resolution:
+
+- Created dedicated `Sales-HR-Project-Team` security group
+- Applied least-privilege permissions
+- Granted only required access
+- Verified access restrictions
+
+---
+
+## 4. Employee Offboarding
+
+Scenario:
+
+A departed employee needed access removed.
+
+Resolution:
+
+- Disabled the user account
+- Moved account into Disabled-Accounts OU
+- Preserved account records according to standard IT practice
+
+---
+
+# Ticketing System Deployment
+
+A helpdesk environment was deployed using Docker Compose.
+
+Components:
 
 - osTicket
 - MySQL 5.7
 
-Used to simulate a real IT ticket lifecycle.
-
-## Active Directory Configuration
-
 Implemented:
 
-- HR, Sales, IT-Support, Disabled-Accounts OUs
-- Security groups:
-  - HR-Team
-  - Sales-Team
-  - IT-Admins
-  - Sales-HR-Project-Team
+- Custom IT Support department
+- Agent configuration
+- User ticket submission
+- Ticket resolution workflow
 
-Configured:
+All four Active Directory scenarios were documented as real support tickets, connecting technical fixes with a realistic IT support lifecycle.
 
-- NTFS permissions
-- Group Policy drive mapping
-- Item-level targeting
-- Account lockout policy
+---
 
-## IT Support Scenarios
+# Screenshots
 
-Completed four realistic support tickets:
+The complete project walkthrough and verification screenshots are available here:
 
-### 1. Account Lockout
+```
+screenshots/
+```
 
-- User locked after failed login attempts
-- Account unlocked through ADUC
-- Login verified successfully
+The screenshot collection includes:
 
-### 2. New-Hire Onboarding
+- Virtual machine setup
+- Domain controller configuration
+- Active Directory structure
+- Group Policy implementation
+- Client verification
+- Support scenarios
+- osTicket deployment
+- Ticket resolution workflow
 
-- Created new user account
-- Assigned department group membership
-- Forced password change at first login
+---
 
-### 3. Cross-Department Permissions
+# Documentation
 
-- Created scoped security group
-- Applied least-privilege access
-- Verified correct resource access
+Full technical documentation:
 
-### 4. Employee Offboarding
+```
+IT_Support_Simulation_Lab_Report.docx
+```
 
-- Disabled user account
-- Moved account to Disabled-Accounts OU
+The report includes:
 
-## Technologies
+- 50+ pages of documentation
+- 70+ verification screenshots
+- Troubleshooting table
+- Root cause analysis
+- Skills demonstrated
+
+---
+
+# Technologies Used
 
 - Windows Server 2022
 - Windows 10
-- Active Directory
+- Active Directory Domain Services
 - DNS
 - Group Policy
 - NTFS Permissions
@@ -102,12 +231,23 @@ Completed four realistic support tickets:
 - osTicket
 - Oracle VirtualBox
 
-## Documentation
+---
 
-Full technical report:
+# Skills Demonstrated
 
-`IT_Support_Simulation_Lab_Report.docx`
+- Enterprise environment design
+- Windows Server administration
+- Active Directory management
+- User and group administration
+- Group Policy configuration
+- Access control and permissions
+- Least-privilege implementation
+- IT troubleshooting
+- Helpdesk ticket management
+- Docker deployment
 
-Screenshots:
+---
 
-`screenshots/`
+# Project Goal
+
+This project was built to simulate real-world IT support and system administration responsibilities, combining infrastructure management, user support, security practices, and documentation.
