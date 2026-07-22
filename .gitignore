@@ -1,0 +1,32 @@
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VirtualBox files
+*.vdi
+*.vbox
+*.vbox-prev
+*.sav
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Word temporary files
+~$*.docx
+
+# Docker volumes/data
+mysql_data/
+osticket_data/
+
+# Secrets
+config.php
+*.key
+*.pem
+*.crt
