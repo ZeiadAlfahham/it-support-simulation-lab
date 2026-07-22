@@ -1,6 +1,5 @@
 # IT Support Simulation Lab
 
-![IT Support Lab]
 
 A complete enterprise IT support and system administration simulation environment built to replicate real-world business infrastructure, user management, security policies, troubleshooting workflows, and helpdesk operations.
 
