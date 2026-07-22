@@ -1,48 +1,103 @@
 # IT Support Simulation Lab
 
-A self-contained enterprise IT environment built to practice the full lifecycle of IT support and systems administration — from infrastructure design and Active Directory deployment to helpdesk operations using a Docker-deployed ticketing system.
+![IT Support Lab](screenshots/01-vm-setup/Figure%201.1%20-%20DC01%20VirtualBox%20Details.png)
 
-The project simulates a small enterprise environment where users, permissions, policies, troubleshooting scenarios, and support workflows are managed as they would be in a real IT environment.
+A complete enterprise IT support and system administration simulation environment built to replicate real-world business infrastructure, user management, security policies, troubleshooting workflows, and helpdesk operations.
+
+The project demonstrates the full IT support lifecycle:
+
+- Infrastructure deployment
+- Active Directory administration
+- User and group management
+- Group Policy implementation
+- Access control configuration
+- Troubleshooting real support incidents
+- Helpdesk ticket management using osTicket
+
+---
+
+# Table of Contents
+
+- [Lab Architecture](#lab-architecture)
+- [Active Directory Implementation](#active-directory-implementation)
+- [IT Support Scenarios](#it-support-scenarios)
+- [Ticketing System Deployment](#ticketing-system-deployment)
+- [Project Screenshots](#project-screenshots)
+- [Documentation](#documentation)
+- [Technologies Used](#technologies-used)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Project Goal](#project-goal)
 
 ---
 
 # Lab Architecture
 
-The environment consists of two virtual machines running on an isolated Oracle VirtualBox NAT network.
+The environment consists of two Windows virtual machines running on an isolated Oracle VirtualBox NAT network.
 
-## DC01 — Windows Server 2022
+## Network Design
 
-Configured as the enterprise Domain Controller:
+```
+                Enterprise Lab Network
+
+                       NAT Network
+
+                           |
+                           |
+              +------------+------------+
+              |                         |
+          DC01 Server              CLIENT01
+       Windows Server 2022       Windows 10
+              |                         |
+              |
+     Active Directory Domain
+          corp.local
+```
+
+---
+
+# DC01 — Windows Server 2022
+
+Configured as the enterprise Domain Controller.
+
+Implemented services:
 
 - Active Directory Domain Services (AD DS)
 - DNS Server
-- Domain: `corp.local`
+- Domain Controller
 - Organizational Units
 - Security Groups
 - Group Policy Objects
 - NTFS Permissions
 
+
 Resources:
 
-- 4096 MB RAM
-- 2 Processors
-- 60 GB Storage
+| Resource | Configuration |
+|---|---|
+| RAM | 4096 MB |
+| CPU | 2 Processors |
+| Storage | 60 GB |
 
+---
 
-## CLIENT01 — Windows 10
+# CLIENT01 — Windows 10
 
 Domain-joined workstation used for:
 
-- User testing
+- User authentication testing
 - Group Policy verification
 - Network drive validation
-- Access control testing
+- Permission testing
+- Support scenario simulation
+
 
 Resources:
 
-- 4096 MB RAM
-- 2 Processors
-- 40 GB Storage
+| Resource | Configuration |
+|---|---|
+| RAM | 4096 MB |
+| CPU | 2 Processors |
+| Storage | 40 GB |
 
 ---
 
@@ -50,13 +105,18 @@ Resources:
 
 ## Organizational Units
 
-Created the following structure:
+Created enterprise-style organizational structure:
 
-- HR
-- Sales
-- IT-Support
-- Disabled-Accounts
+```
+corp.local
+│
+├── HR
+├── Sales
+├── IT-Support
+└── Disabled-Accounts
+```
 
+---
 
 ## Security Groups
 
@@ -67,147 +127,232 @@ Implemented role-based access control using:
 - IT-Admins
 - Sales-HR-Project-Team
 
+---
 
-## Group Policy Configuration
+# Group Policy Configuration
 
-Implemented enterprise-style policies:
+## Sales Drive Mapping
 
-### Sales Drive Mapping
+Created Group Policy Object:
 
-Created:
+```
+Sales - Map Drive
+```
 
-`Sales - Map Drive`
-
-Features:
+Implemented:
 
 - Automatic S: network drive mapping
-- Applied to Sales OU
+- OU-based deployment
 - Security group filtering
 - Item-level targeting
 
 
-### Account Lockout Policy
+---
 
-Configured:
+## Account Lockout Policy
 
-- 5 failed login attempts
-- 30-minute account lockout duration
-- 30-minute counter reset period
+Configured security policy:
+
+- Maximum failed attempts: 5
+- Lockout duration: 30 minutes
+- Reset counter period: 30 minutes
 
 ---
 
 # IT Support Scenarios
 
-Four realistic support scenarios were completed from issue identification to resolution.
+Four realistic enterprise support cases were simulated from ticket creation to resolution.
 
-## 1. Account Lockout
+---
 
-Scenario:
+# Scenario 1 — Account Lockout
 
-A user was unable to access their account after multiple failed login attempts.
+## Problem
 
-Resolution:
+A user was unable to authenticate after multiple incorrect password attempts.
 
-- Identified locked account in Active Directory Users and Computers
-- Unlocked the user account
-- Verified successful login
+## Resolution
 
+- Located locked account in Active Directory Users and Computers
+- Unlocked user account
+- Verified successful authentication
 
-## 2. New-Hire Onboarding
+---
 
-Scenario:
+# Scenario 2 — New Employee Onboarding
+
+## Problem
 
 A new employee required access to company resources.
 
-Resolution:
+## Resolution
 
-- Created new Active Directory account
-- Assigned department group membership
-- Forced password change at first login
+- Created Active Directory user account
+- Assigned department membership
+- Configured first-login password change
+- Verified successful login
 
+---
 
-## 3. Cross-Department Permissions
+# Scenario 3 — Cross Department Permissions
 
-Scenario:
+## Problem
 
-An HR employee required access to a shared Sales project folder.
+An HR employee required controlled access to a shared Sales project folder.
 
-Resolution:
+## Resolution
 
-- Created Sales-HR-Project-Team security group
-- Applied least-privilege permissions
-- Verified access restrictions
+- Created dedicated security group
+- Applied least-privilege NTFS permissions
+- Verified authorized and unauthorized access
 
+---
 
-## 4. Employee Offboarding
+# Scenario 4 — Employee Offboarding
 
-Scenario:
+## Problem
 
-A departed employee needed access removed.
+A terminated employee required immediate access removal.
 
-Resolution:
+## Resolution
 
 - Disabled user account
 - Moved account into Disabled-Accounts OU
+- Verified login prevention
 - Preserved account records
 
 ---
 
 # Ticketing System Deployment
 
-A helpdesk environment was deployed using Docker Compose.
+A complete helpdesk environment was deployed using Docker Compose.
 
-Components:
+## Components
 
 - osTicket
 - MySQL 5.7
+- Docker
+
 
 Implemented:
 
-- Custom IT Support department
-- Agent configuration
+- IT Support department
+- Agent accounts
 - User ticket submission
-- Ticket resolution workflow
+- Ticket assignment
+- Resolution workflow
 
-All Active Directory scenarios were documented as real support tickets.
+
+All Active Directory incidents were documented as real IT support tickets.
 
 ---
 
 # Project Screenshots
 
+The screenshots below provide evidence of:
+
+- Virtual machine deployment
+- Active Directory configuration
+- Group Policy implementation
+- Security permissions
+- Support scenarios
+- Helpdesk operations
+
+
 ## Virtual Machine Setup
 
-![VirtualBox Setup](screenshots/01-vm-setup/Figure%201.1%20-%20DC01%20VirtualBox%20Details.png)
+### DC01 — Domain Controller
 
-![Client VM Setup](screenshots/01-vm-setup/Figure%201.2%20-%20CLIENT01%20VirtualBox%20Details.png)
-
-
-## Domain Controller
-
-![DC01 Login](screenshots/02-domain-controller/Figure%203.1%20-%20DC01%20Login%20Screen%20(CORP%20Administrator).png)
-
-![Server Manager](screenshots/02-domain-controller/Figure%203.2%20-%20Server%20Manager%20Dashboard%20(AD%20DS%20and%20DNS).png)
+![DC01](screenshots/01-vm-setup/Figure%201.1%20-%20DC01%20VirtualBox%20Details.png)
 
 
-More screenshots are available in:
+### CLIENT01 — Workstation
 
-`screenshots/`
+![CLIENT01](screenshots/01-vm-setup/Figure%201.2%20-%20CLIENT01%20VirtualBox%20Details.png)
+
+
+---
+
+# Active Directory Structure
+
+### Organizational Units
+
+![OU Structure](screenshots/03-ad-structure/Figure%204.1%20-%20OU%20Tree%20in%20ADUC.png)
+
+
+---
+
+# Group Policy
+
+### Drive Mapping
+
+![Drive Mapping](screenshots/03-ad-structure/Figure%204.3%20-%20GPO%20Drive%20Maps%20Configuration.png)
+
+
+### Account Lockout Policy
+
+![Lockout Policy](screenshots/03-ad-structure/Figure%204.5%20-%20Account%20Lockout%20Policy%20Settings.png)
+
+
+---
+
+# Scenario Evidence
+
+## Account Lockout Resolution
+
+![Account Unlock](screenshots/05-scenario-1-lockout/Figure%206.1.5%20-%20Scenario1%20Unlock%20Account%20Checkbox.png)
+
+
+## Employee Onboarding
+
+![New User](screenshots/06-scenario-2-onboarding/Figure%206.2.2%20-%20Scenario2%20Initial%20Password%20Setup.png)
+
+
+## Permission Management
+
+![NTFS Permissions](screenshots/07-scenario-3-permissions/Figure%204.2%20-%20NTFS%20Permissions%20on%20Sales%20Folder.png)
+
+
+## Employee Offboarding
+
+![Offboarding](screenshots/08-scenario-4-offboarding/Figure%206.4.2%20-%20Scenario4%20Moving%20to%20Disabled-Accounts%20OU.png)
+
+
+---
+
+# Helpdesk Ticketing System
+
+Additional evidence:
+
+```
+screenshots/09-osticket-deployment/
+screenshots/10-resolved-tickets/
+```
+
+Includes:
+
+- Ticket creation
+- User requests
+- Agent responses
+- Resolution documentation
 
 ---
 
 # Documentation
 
-Full technical documentation:
+Complete technical report:
 
-`IT_Support_Simulation_Lab_Report.docx`
+```
+IT_Support_Simulation_Lab_Report.docx
+```
 
-The report includes:
+Includes:
 
+- Full implementation steps
 - 50+ pages of documentation
 - 70+ verification screenshots
-- Troubleshooting table
-- Root cause analysis
-
+- Troubleshooting analysis
+- Root cause explanations
 
 ---
 
@@ -229,20 +374,29 @@ The report includes:
 
 # Skills Demonstrated
 
-- Enterprise environment design
-- Windows Server administration
-- Active Directory management
-- User and group administration
-- Group Policy configuration
-- Access control and permissions
-- Least-privilege implementation
-- IT troubleshooting
-- Helpdesk ticket management
-- Docker deployment
-
+- Windows Server Administration
+- Active Directory Management
+- User and Group Administration
+- Group Policy Configuration
+- Access Control Management
+- Least Privilege Implementation
+- IT Troubleshooting
+- Helpdesk Operations
+- Ticket Management
+- Docker Deployment
+- Technical Documentation
 
 ---
 
 # Project Goal
 
-This project was built to simulate real-world IT support and system administration responsibilities, combining infrastructure management, user support, security practices, and documentation.
+This project was created to simulate real enterprise IT support responsibilities by combining:
+
+- Infrastructure administration
+- Identity and access management
+- Security best practices
+- User support workflows
+- Troubleshooting methodologies
+- Professional technical documentation
+
+The goal was to build practical experience similar to the responsibilities of an **IT Support Specialist, System Administrator, or Junior Security Analyst**.
