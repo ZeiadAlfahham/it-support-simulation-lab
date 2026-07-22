@@ -1,6 +1,6 @@
 # IT Support Simulation Lab
 
-![IT Support Lab](screenshots/01-vm-setup/Figure%201.1%20-%20DC01%20VirtualBox%20Details.png)
+![IT Support Lab]
 
 A complete enterprise IT support and system administration simulation environment built to replicate real-world business infrastructure, user management, security policies, troubleshooting workflows, and helpdesk operations.
 
