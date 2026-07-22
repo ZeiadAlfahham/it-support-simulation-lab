@@ -8,7 +8,7 @@ The project simulates a small enterprise environment where users, permissions, p
 
 # Lab Architecture
 
-The environment consists of two virtual machines running on an isolated Oracle VirtualBox NAT network:
+The environment consists of two virtual machines running on an isolated Oracle VirtualBox NAT network.
 
 ## DC01 — Windows Server 2022
 
@@ -28,7 +28,6 @@ Resources:
 - 2 Processors
 - 60 GB Storage
 
----
 
 ## CLIENT01 — Windows 10
 
@@ -58,6 +57,7 @@ Created the following structure:
 - IT-Support
 - Disabled-Accounts
 
+
 ## Security Groups
 
 Implemented role-based access control using:
@@ -67,28 +67,26 @@ Implemented role-based access control using:
 - IT-Admins
 - Sales-HR-Project-Team
 
----
 
-# Group Policy Configuration
+## Group Policy Configuration
 
 Implemented enterprise-style policies:
 
-## Sales Drive Mapping
+### Sales Drive Mapping
 
-Created a Group Policy Object:
+Created:
 
-**Sales - Map Drive**
+`Sales - Map Drive`
 
 Features:
 
 - Automatic S: network drive mapping
 - Applied to Sales OU
-- Restricted using item-level targeting
-- Security group based filtering
+- Security group filtering
+- Item-level targeting
 
----
 
-## Account Lockout Policy
+### Account Lockout Policy
 
 Configured:
 
@@ -114,7 +112,6 @@ Resolution:
 - Unlocked the user account
 - Verified successful login
 
----
 
 ## 2. New-Hire Onboarding
 
@@ -128,7 +125,6 @@ Resolution:
 - Assigned department group membership
 - Forced password change at first login
 
----
 
 ## 3. Cross-Department Permissions
 
@@ -138,12 +134,10 @@ An HR employee required access to a shared Sales project folder.
 
 Resolution:
 
-- Created dedicated `Sales-HR-Project-Team` security group
+- Created Sales-HR-Project-Team security group
 - Applied least-privilege permissions
-- Granted only required access
 - Verified access restrictions
 
----
 
 ## 4. Employee Offboarding
 
@@ -153,9 +147,9 @@ A departed employee needed access removed.
 
 Resolution:
 
-- Disabled the user account
+- Disabled user account
 - Moved account into Disabled-Accounts OU
-- Preserved account records according to standard IT practice
+- Preserved account records
 
 ---
 
@@ -175,28 +169,29 @@ Implemented:
 - User ticket submission
 - Ticket resolution workflow
 
-All four Active Directory scenarios were documented as real support tickets, connecting technical fixes with a realistic IT support lifecycle.
+All Active Directory scenarios were documented as real support tickets.
 
 ---
 
-# Screenshots
+# Project Screenshots
 
-The complete project walkthrough and verification screenshots are available here:
+## Virtual Machine Setup
 
-```
-screenshots/
-```
+![VirtualBox Setup](screenshots/01-vm-setup/Figure%201.1%20-%20DC01%20VirtualBox%20Details.png)
 
-The screenshot collection includes:
+![Client VM Setup](screenshots/01-vm-setup/Figure%201.2%20-%20CLIENT01%20VirtualBox%20Details.png)
 
-- Virtual machine setup
-- Domain controller configuration
-- Active Directory structure
-- Group Policy implementation
-- Client verification
-- Support scenarios
-- osTicket deployment
-- Ticket resolution workflow
+
+## Domain Controller
+
+![DC01 Login](screenshots/02-domain-controller/Figure%203.1%20-%20DC01%20Login%20Screen%20(CORP%20Administrator).png)
+
+![Server Manager](screenshots/02-domain-controller/Figure%203.2%20-%20Server%20Manager%20Dashboard%20(AD%20DS%20and%20DNS).png)
+
+
+More screenshots are available in:
+
+`screenshots/`
 
 ---
 
@@ -204,9 +199,7 @@ The screenshot collection includes:
 
 Full technical documentation:
 
-```
-IT_Support_Simulation_Lab_Report.docx
-```
+`IT_Support_Simulation_Lab_Report.docx`
 
 The report includes:
 
@@ -214,7 +207,7 @@ The report includes:
 - 70+ verification screenshots
 - Troubleshooting table
 - Root cause analysis
-- Skills demonstrated
+
 
 ---
 
@@ -231,6 +224,7 @@ The report includes:
 - osTicket
 - Oracle VirtualBox
 
+
 ---
 
 # Skills Demonstrated
@@ -245,6 +239,7 @@ The report includes:
 - IT troubleshooting
 - Helpdesk ticket management
 - Docker deployment
+
 
 ---
 
